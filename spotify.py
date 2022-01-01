@@ -88,7 +88,7 @@ def getSpotifyUserPlayList(play_lists):
 #store access tokens for later use
 # credentials_json = shopifyAccessToken.json()
 #taken from web player headers
-access_token = 'Bearer ' + "BQDzVspXF_FWhbrD1KN5RUnrPN6R1ehyADIlDDw2n7zfLdLW9iFgKHpEq_yiT9LfQBrMXyWGc2mR11F6GWI_ccpmnH3VlE1P2pxKaQP4sSzZLT7stWh_qaLRSB8b9bJtgK4SMXwvjQIpO8QfOveaVR_nQ_OyIchB7Zbl7M7vxdysykWT37DRyCt2CYw_kB3tqgzdkztUU3tZY2musqoEbPsIbBRoJZiINOmltayCjIeOy6dxkB2if-SePthw_19KT62Y5MUaa0j8WYXAbKNp5Be_Hcfv7of8pxqNw6blIBm2N0WhU67lzwobMiLj"
+access_token = 'Bearer ' + ""
 print("access token: " + access_token)
 print("\n")
 

@@ -24,8 +24,28 @@ class ShopifyPlayList(object):
     def __init__(self, dict1):
         self.__dict__.update(dict1)
 
+class SpotifyUserPlaylist(object):
+    def __init__(self, play_lists):
+        self.play_lists = play_lists
+
 class PlayList(object):
-    def __init__(self, id, href, name, owner, public, sharing_info, tracks)
+    def __init__(self, id, href, name, owner, public, sharing_info, track_info):
+        self.id = id
+        self.href = href
+        self.name = name
+        self.owner = owner
+        self.public = public
+        self.sharing_info = sharing_info
+        self.track_info = track_info
+
+#tracks.items.track.name
+#tracks.items.track.artists.name
+#tracks.items.track.album.name
+class TrackInfo(object):
+    def __init__(self, track_name, artists, album_name):
+        self.track_name = track_name
+        self.artists = artists
+        self.album_name = album_name
 
 def getPlaylistItems(play_lists):
     items = list()
@@ -41,22 +61,34 @@ def getPlayLists(play_list_hrefs):
         play_lists.append(playlist)
     return play_lists
 
-#get bearer token
-authCredential = "2e920c26beff4c14a5c1d29c1689e11f:b4b9ba29fc6c409da174b02dcb9c7fe6"
-authCredentialsBase64Bytes = base64.b64encode(authCredential.encode("ascii"))
-authStringBase64 = authCredentialsBase64Bytes.decode("ascii")
-authData = "Basic " + authStringBase64
-authHeaders = {'Authorization' : authData}
-payload = {'grant_type': 'client_credentials'}
+def getSpotifyUserPlayList(play_lists):
+    playList_obj = list()
+    for play_list in play_lists:
+        track_obj = list()
+        for play_list_item in play_list.tracks.items:
+            track_spotify = TrackInfo(play_list_item.track.name, play_list_item.track.artists, play_list_item.track.album.name)
+            track_obj.append(track_spotify)
+        play_list_spotify= PlayList(play_list.id, play_list.href, play_list.name, play_list.owner, play_list.public, play_list.sharing_info, track_obj)
+        playList_obj.append(play_list_spotify)
+    return SpotifyUserPlaylist(playList_obj)
+    
 
-shopifyAccessToken = requests.post("https://accounts.spotify.com/api/token", headers = authHeaders, data=payload)
-print("credentials:" + shopifyAccessToken.text)
-print("\n")
+#get bearer token
+# authCredential = ""
+# authCredentialsBase64Bytes = base64.b64encode(authCredential.encode("ascii"))
+# authStringBase64 = authCredentialsBase64Bytes.decode("ascii")
+# authData = "Basic " + authStringBase64
+# authHeaders = {'Authorization' : authData}
+# payload = {'grant_type': 'client_credentials'}
+
+# shopifyAccessToken = requests.post("https://accounts.spotify.com/api/token", headers = authHeaders, data=payload)
+# print("credentials:" + shopifyAccessToken.text)
+# print("\n")
 
 #store access tokens for later use
-credentials_json = shopifyAccessToken.json()
+# credentials_json = shopifyAccessToken.json()
 #taken from web player headers
-access_token = 'Bearer ' + ""
+access_token = 'Bearer ' + "BQDzVspXF_FWhbrD1KN5RUnrPN6R1ehyADIlDDw2n7zfLdLW9iFgKHpEq_yiT9LfQBrMXyWGc2mR11F6GWI_ccpmnH3VlE1P2pxKaQP4sSzZLT7stWh_qaLRSB8b9bJtgK4SMXwvjQIpO8QfOveaVR_nQ_OyIchB7Zbl7M7vxdysykWT37DRyCt2CYw_kB3tqgzdkztUU3tZY2musqoEbPsIbBRoJZiINOmltayCjIeOy6dxkB2if-SePthw_19KT62Y5MUaa0j8WYXAbKNp5Be_Hcfv7of8pxqNw6blIBm2N0WhU67lzwobMiLj"
 print("access token: " + access_token)
 print("\n")
 
@@ -89,6 +121,11 @@ play_list_hrefs = getPlaylistItems(play_lists['items'])
 play_lists = getPlayLists(play_list_hrefs)
 for play_list in play_lists:
     print(play_list.name)
+    
+spotify_user_playlist = getSpotifyUserPlayList(play_lists)
+print("name: ", spotify_user_playlist.play_lists[0].track_info[90].track_name)
+
+
 
 # output_file = open('playlist.txt', 'w')
 

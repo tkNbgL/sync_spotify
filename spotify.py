@@ -56,7 +56,7 @@ print("\n")
 #store access tokens for later use
 credentials_json = shopifyAccessToken.json()
 #taken from web player headers
-access_token = 'Bearer ' + "BQAs8cnYvuqyoF0p6yG7nGDTNIc3xayFoJNAbeHwbFGrQvEWeD42CtZ3wbnbZkWmkDhDAwZ8_jCRay5QWDtaxtopHaoRm9LGI6cbRnAOknMket7Wa0mko2nFpP3ywiR9_fPg-oapcBC8R5YiWYXZ-ZSOVWRde4qZPOFp9UyTyZPzXV7ygi4thStPlagvy6kJ4yKxCG7jvMqVqiX-ULDJhekdy8xbHTq9x5FaEaYzuLWclvo9z-zT9etaomxQ458s2oO1sqT_fIPJoReh50axHvjcJ4R3gK1H99rNmbInHjShWTh6zc3hB_BaB-w2"
+access_token = 'Bearer ' + ""
 print("access token: " + access_token)
 print("\n")
 
